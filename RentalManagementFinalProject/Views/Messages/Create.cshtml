@@ -1,0 +1,223 @@
+﻿@model RentalManagementFinalProject.Models.Message
+@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+
+        /* Header Styles */
+        h1 {
+            color: #3498db;
+            text-align: center;
+        }
+
+        /* Form Styles */
+        form {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #3498db;
+        }
+
+        input[type="text"],
+        select {
+            padding: 10px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #3498db;
+            border: 1px solid #3498db;
+            cursor: pointer;
+        }
+
+            .btn-primary:hover {
+                background-color: #2072b3;
+                border: 1px solid #2072b3;
+            }
+
+        /* Error Message Styles */
+        .text-danger {
+            color: #ff0000;
+        }
+
+        /* Authorization Message Styles */
+        h1:empty {
+            color: #ff0000;
+        }
+
+        .container-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Message</h1>
+    <hr />
+    <div class="row">
+        @if (ViewData["ErrorMessage"] != null)
+        {
+            <h1>@ViewData["ErrorMessage"]</h1>
+        }
+        <form asp-action="Create" onsubmit="prepareSearchString()">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="container-center">
+                <table>
+                    <tr>
+                        <th><label asp-for="RecipientId" class="control-label">Recipient Name</label></th>
+
+                        @{
+                            if (context.HttpContext.Session.GetString("User") != null)
+                            {
+                                var userSessionAdmin = JsonConvert.DeserializeObject<User>(context.HttpContext.Session.GetString("User"));
+                                if (userSessionAdmin.UserId == 1)
+                                {
+                                    <td>
+                                        <select name="recipientId" id="selectRecipientNameManager" class="form-control" asp-items="ViewBag.listOfRecipientNameManager"></select>
+                                    </td>
+                                    <td>
+                                        <select name="recipientId" style="display: none" id="selectRecipientNameTenant" class="form-control" asp-items="ViewBag.listOfRecipientNameTenant"></select>
+                                    </td>
+                                    <td>
+                                        <select id="selectRecipientType" asp-for="Recipient.UserTypeId" class="form-control" onchange="selectUserType()">
+                                            <option value="2">Manager Property</option>
+                                            <option value="3">Tenant</option>
+                                        </select>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <select asp-for="RecipientId" id="selectRecipientName" class="form-control" asp-items="ViewBag.listOfRecipientName"></select>
+                                    </td>
+                                }
+                            }
+                            else
+                            {
+                                <td>
+                                    <select asp-for="RecipientId" id="selectRecipientName" class="form-control" asp-items="ViewBag.listOfRecipientName"></select>
+                                </td>
+                            }
+                        }
+
+                        <td><span asp-validation-for="RecipientId" class="text-danger"></span></td>
+                    </tr>
+                    <tr>
+                        <th><label asp-for="MessageContent" class="control-label">Message Content</label></th>
+                        <td colspan="3"><textarea asp-for="MessageContent" class="form-control" style="height: 300px; resize: none"></textarea></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="container-center" style="margin-top: 50px;">
+                <input type="hidden" asp-for="TimeCreated" value="@DateTime.Now" />
+                @{
+                    if (context.HttpContext.Session.GetString("User") == null)
+                    {
+                        <input asp-for="SenderId" type="hidden" value="4" />
+                    }
+                    else
+                    {
+                        var userSession = JsonConvert.DeserializeObject<User>(context.HttpContext.Session.GetString("User"));
+                        <input asp-for="SenderId" type="hidden" value="@userSession.UserId" />
+                    }
+                }
+
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a style="margin-left: 30px" class="btn btn-primary" asp-action="Index">Back to List</a>
+            </div>
+
+        </form>
+    </div>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+
+    <script>
+        function selectUserType() {
+            var selectRecipientNameManager = document.getElementById("selectRecipientNameManager");
+            var selectRecipientNameTenant = document.getElementById("selectRecipientNameTenant");
+            var selectRecipientType = document.getElementById("selectRecipientType");
+            if (selectRecipientType.value == 2) {
+                selectRecipientNameManager.style.display = 'block';
+                selectRecipientNameTenant.style.display = 'none';
+            }
+            else if (selectRecipientType.value == 3) {
+                selectRecipientNameManager.style.display = 'none';
+                selectRecipientNameTenant.style.display = 'block';
+            }
+        }
+        function prepareSearchString() {
+
+            var selectRecipientType = document.getElementById("selectRecipientType").value;
+            var selectRecipientNameManager = document.getElementById("selectRecipientNameManager");
+            var selectRecipientNameTenant = document.getElementById("selectRecipientNameTenant");
+
+            // Set the name attribute of the currently visible element to "searchString"
+            if (selectRecipientType == 2) {
+                selectRecipientNameTenant.name = ""; // Remove the name attribute from the input
+                selectRecipientNameManager.name = "recipientId";
+            } else if (selectRecipientType == 3) {
+                selectRecipientNameTenant.name = "recipientId";
+                selectRecipientNameManager.name = "";
+
+            }
+        }
+    </script>
+</body>
+</html>
+
+

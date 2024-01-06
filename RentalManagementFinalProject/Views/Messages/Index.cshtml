@@ -1,0 +1,295 @@
+﻿@model IEnumerable<RentalManagementFinalProject.Models.Message>
+@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var sessionUser = JsonConvert.DeserializeObject<User>(context.HttpContext.Session.GetString("User"));
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <style>
+
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        h1 {
+            color: #3498db;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+            a:hover {
+                color: #2072b3;
+            }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        select, input[type="text"] {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+        }
+
+        /* Table Styles */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            .table th, .table td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #3498db;
+            }
+
+            .table th {
+                background-color: #3498db;
+                color: #fff;
+            }
+
+
+        .text-danger {
+            color: #ff0000;
+        }
+
+
+        h1:empty {
+            color: #ff0000;
+        }
+
+        .container-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    @if (context.HttpContext.Session.GetString("UserType") == "Property Owner" || context.HttpContext.Session.GetString("UserType") == "Property Manager" || context.HttpContext.Session.GetString("UserType") == "Tenant")
+    {
+        <h1> Message Management</h1>
+        <form id="searchForm" asp-controller="Messages" asp-action="Index" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="display: flex; align-items: center">
+                <select style="margin-right: 20px" name="searchType" onchange="selectSearch()" id="searchType">
+                    <option value="Sender">Sender/Receiver Name</option>
+                    <option value="MessageContent">Message Content</option>
+                    <option value="TimeCreated">Time Sending/Receiving</option>
+                    <option value="All">All Messages</option>
+                </select>
+                <input type="text" id="searchString" name="searchString" class="form-control" /> <!---->
+                <div id="searchDate" style="display: none; align-items: center">
+                    <input type="date" placeholder="From" id="searchDateFrom" name="searchDateFrom" class="form-control" /> -
+                    <input type="date" placeholder="To" id="searchDateTo" name="searchDateTo" class="form-control" /> <!---->
+                </div>
+
+                <input style="width: 25px; height: 25px; margin-left: 20px" type="image" src="~/images/magnifying-glass.jfif" alt="Submit Form" form="searchForm">
+            </div>
+        </form>
+        @if (ViewData["ErrorMessage"] != null)
+        {
+            <h1>@ViewData["ErrorMessage"]</h1>
+        }
+        else
+        {
+            <div style="display: flex; align-items: center;">
+                <h1>List Of Receiving Messages</h1>
+                <input style="width: 25px; height: 25px; margin-left: 20px" type="image" src="~/images/plus.png" alt="Create new" onclick="navigateToCreateView()">
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Sender Name
+                        </th>
+                        <th>
+                            User Type
+                        </th>
+                        <th>
+                            Message Information
+                        </th>
+                        <th>
+                            Time Receiving
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Where(m => m.RecipientId == sessionUser.UserId))
+                    {
+                        <tr>
+                            <td>
+                                @{
+                                    ViewData["Fullname"] = item.Sender.FirstName + " " + item.Sender.LastName;
+                                }
+                                @ViewData["Fullname"]
+
+                            </td>
+                            @{
+                                if (item.Sender.UserTypeId == 2)
+                                {
+                                    <td>Manager Property</td>
+                                }
+                                else if (item.Sender.UserTypeId == 3)
+                                {
+                                    <td>Tenant</td>
+                                }
+                                else if (item.Sender.UserTypeId == 4)
+                                {
+                                    <td>Anonymous</td>
+                                }
+                                else if (item.Sender.UserTypeId == 1)
+                                {
+                                    <td>Admin</td>
+                                }
+                            }
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MessageContent)
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TimeCreated)
+
+                            </td>
+
+                            <td>
+                                <a asp-action="Create">Reply</a> |
+                                <a asp-action="Details" asp-route-id="@item.MessageId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.MessageId">Delete</a>
+                            </td>
+
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div style="display: flex; align-items: center;">
+                <h1>List of Sending Messages</h1> <br />
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Recipient Name
+                        </th>
+                        <th>
+                            User Type
+                        </th>
+                        <th>
+                            Message Information
+                        </th>
+                        <th>
+                            Time Sending
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Where(m => m.SenderId == sessionUser.UserId))
+                    {
+                        <tr>
+                            <td>
+                                @{
+                                    ViewData["Fullname"] = item.Recipient.FirstName + " " + item.Recipient.LastName;
+                                }
+                                @ViewData["Fullname"]
+
+                            </td>
+
+                            @{
+                                if (item.Recipient.UserTypeId == 2)
+                                {
+                                    <td>Manager Property</td>
+                                }
+                                else if (item.Recipient.UserTypeId == 3)
+                                {
+                                    <td>Tenant</td>
+                                }
+                                else if (item.Recipient.UserTypeId == 4)
+                                {
+                                    <td>Anonymous</td>
+                                }
+                                else if (item.Recipient.UserTypeId == 1)
+                                {
+                                    <td>Admin</td>
+                                }
+                            }
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MessageContent)
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TimeCreated)
+
+                            </td>
+                            <td>
+                                <a asp-action="Create">Reply</a> |
+                                <a asp-action="Details" asp-route-id="@item.MessageId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.MessageId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+        <script>
+            function navigateToCreateView() {
+                // Redirect to another view or page
+                window.location.href = '/Messages/Create';
+            }
+            function selectSearch() {
+                var searchType = document.getElementById("searchType");
+                var searchString = document.getElementById("searchString");
+                var searchDate = document.getElementById("searchDate");
+
+                if (searchType["value"] == "All") {
+                    searchString.style.display = 'none';
+                    searchDate.style.display = 'none';
+                }
+                else if (searchType["value"] == "TimeCreated") {
+                    searchString.style.display = 'none';
+                    searchDate.style.display = 'flex';
+                }
+                else {
+                    searchString.style.display = 'block';
+                    searchDate.style.display = 'none';
+                }
+            }
+        </script>
+    }
+    else
+    {
+        <div class="container-center">
+            <h1>You Have No Authorization to Access</h1>
+            <a style="margin-left: 30px" class="btn btn-primary" asp-action="Index" asp-controller="Home">Back to Home Page</a>
+        </div>
+    }
+</body>
+</html>

@@ -1,0 +1,321 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\RentalManagementFinalProject.bundle.scp.css",
+      "PackagePath": "staticwebassets\\RentalManagementFinalProject.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\images\\apartment1.jfif",
+      "PackagePath": "staticwebassets\\images\\apartment1.jfif"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\images\\apartment10.jfif",
+      "PackagePath": "staticwebassets\\images\\apartment10.jfif"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\images\\apartment2.jfif",
+      "PackagePath": "staticwebassets\\images\\apartment2.jfif"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\images\\apartment3.jfif",
+      "PackagePath": "staticwebassets\\images\\apartment3.jfif"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\images\\apartment4.jfif",
+      "PackagePath": "staticwebassets\\images\\apartment4.jfif"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\images\\apartment5.jfif",
+      "PackagePath": "staticwebassets\\images\\apartment5.jfif"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\images\\apartment6.jfif",
+      "PackagePath": "staticwebassets\\images\\apartment6.jfif"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\images\\apartment7.jfif",
+      "PackagePath": "staticwebassets\\images\\apartment7.jfif"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\images\\apartment8.jfif",
+      "PackagePath": "staticwebassets\\images\\apartment8.jfif"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\images\\apartment9.jfif",
+      "PackagePath": "staticwebassets\\images\\apartment9.jfif"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\images\\hide-password.png",
+      "PackagePath": "staticwebassets\\images\\hide-password.png"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\images\\magnifying-glass.jfif",
+      "PackagePath": "staticwebassets\\images\\magnifying-glass.jfif"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\images\\plus.png",
+      "PackagePath": "staticwebassets\\images\\plus.png"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\images\\show-password.png",
+      "PackagePath": "staticwebassets\\images\\show-password.png"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\Programming\\Project_College\\C#\\RentalManagementFinalProject\\RentalManagementFinalProject\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.RentalManagementFinalProject.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.RentalManagementFinalProject.props",
+      "PackagePath": "build\\RentalManagementFinalProject.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.RentalManagementFinalProject.props",
+      "PackagePath": "buildMultiTargeting\\RentalManagementFinalProject.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.RentalManagementFinalProject.props",
+      "PackagePath": "buildTransitive\\RentalManagementFinalProject.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

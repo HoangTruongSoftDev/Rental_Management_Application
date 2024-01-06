@@ -1,0 +1,309 @@
+﻿@model IEnumerable<RentalManagementFinalProject.Models.User>
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <style>
+        
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        h1 {
+            color: #3498db;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+            a:hover {
+                color: #2072b3;
+            }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        select, input[type="text"] {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+        }
+
+        /* Table Styles */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            .table th, .table td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #3498db;
+            }
+
+            .table th {
+                background-color: #3498db;
+                color: #fff;
+            }
+
+
+        .text-danger {
+            color: #ff0000;
+        }
+
+
+        h1:empty {
+            color: #ff0000;
+        }
+        .container-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    @if (context.HttpContext.Session.GetString("UserType") == "Property Owner")
+    {
+        <h1>List Of Users</h1>
+        <form id="searchForm" asp-controller="Users" asp-action="Index" method="post" onsubmit="prepareSearchString()">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="display: flex; align-items: center;">
+                <select style="margin-right: 20px" name="searchType" onchange="selectSearch()" id="searchType">
+                    <option value="FirstName">First Name</option>
+                    <option value="LastName">Last Name</option>
+                    <option value="UserType">User Type</option>
+                    <option value="Status">Status</option>
+                    <option value="All">All Users</option>
+                </select>
+                <input type="text" id="searchString" name="searchString" class="form-control" />
+                <select style="display: none" id="dropDownListUserType" name="searchString" class="form-control">
+                    <option value="Property Manager">Property Manager</option>
+                    <option value="Tenant">Tenant</option>
+                </select>
+                <select style="display: none" id="dropDownListStatus" name="searchString" class="form-control">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+                <input style="width: 25px; height: 25px; margin-left: 20px" type="image" src="~/images/magnifying-glass.jfif" alt="Submit Form" form="searchForm">
+            </div>
+        </form>
+        @if (ViewData["ErrorMessage"] != null)
+        {
+            <h1>@ViewData["ErrorMessage"]</h1>
+        }
+        else
+        {
+            <div style="display: flex; align-items: center;">
+                <h1>Property Manager</h1>
+                <input style="width: 25px; height: 25px; margin-left: 20px" type="image" src="~/images/plus.png" alt="Create new user" onclick="navigateToCreateView()">
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                             User Name
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Password)
+                        </th>
+                        <th>
+                             First Name
+                        </th>
+                        <th>
+                            Last Name
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            User Type
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Where(u => u.UserTypeId == 2))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Password)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserType.Description)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <h1>Potential Tenant</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            User Name
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Password)
+                        </th>
+                        <th>
+                            First Name
+                        </th>
+                        <th>
+                            Last Name
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            User Type
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Where(u => u.UserTypeId == 3))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Password)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserType.Description)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+
+    }
+    else
+    {
+        <div class="container-center">
+            <h1>You Have No Authorization to Access</h1>
+            <a style="margin-left: 30px" class="btn btn-primary" asp-action="Index" asp-controller="Home">Back to Home Page</a>
+        </div>
+    }
+    <script>
+        function navigateToCreateView() {
+            // Redirect to another view or page
+            window.location.href = '/Users/Create';
+        }
+        function selectSearch() {
+            var searchType = document.getElementById("searchType");
+            var searchString = document.getElementById("searchString");
+            var dropDownListUserType = document.getElementById("dropDownListUserType");
+            var dropDownListStatus = document.getElementById("dropDownListStatus");
+            if (searchType["value"] == "All") {
+                searchString.style.display = 'none';
+                dropDownListUserType.style.display = 'none';
+                dropDownListStatus.style.display = 'none';
+            }
+            else if (searchType["value"] == "UserType") {
+                searchString.style.display = 'none';
+                dropDownListUserType.style.display = 'block';
+                dropDownListStatus.style.display = 'none';
+            }
+            else if (searchType["value"] == "Status") {
+                searchString.style.display = 'none';
+                dropDownListUserType.style.display = 'none';
+                dropDownListStatus.style.display = 'block';
+            }
+            else {
+                dropDownListUserType.style.display = 'none';
+                dropDownListStatus.style.display = 'none';
+                searchString.style.display = 'block';
+            }
+        }
+        function prepareSearchString() {
+            
+            var searchType = document.getElementById("searchType").value;
+            var searchStringInput = document.getElementById("searchString");
+            var userTypeDropdown = document.getElementById("dropDownListUserType");
+            var statusDropdown = document.getElementById("dropDownListStatus");
+
+            // Set the name attribute of the currently visible element to "searchString"
+            if (searchType == "UserType") {
+                searchStringInput.name = ""; // Remove the name attribute from the input
+                userTypeDropdown.name = "searchString";
+                statusDropdown.name = "";
+            } else if (searchType == "Status") {
+                searchStringInput.name = ""; // Remove the name attribute from the input
+                statusDropdown.name = "searchString";
+                userTypeDropdown.name = "";
+            }
+            else {
+                // Reset the name attributes to the default
+                searchStringInput.name = "searchString";
+                userTypeDropdown.name = "";
+                statusDropdown.name = "";
+            }
+            
+        }
+    </script>
+</body>
+</html>
+

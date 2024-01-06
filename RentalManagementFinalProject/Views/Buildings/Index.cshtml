@@ -1,0 +1,174 @@
+﻿@model IEnumerable<RentalManagementFinalProject.Models.Building>
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <style>
+
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        h1 {
+            color: #3498db;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+            a:hover {
+                color: #2072b3;
+            }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        select, input[type="text"] {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+        }
+
+        /* Table Styles */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            .table th, .table td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #3498db;
+            }
+
+            .table th {
+                background-color: #3498db;
+                color: #fff;
+            }
+
+
+        .text-danger {
+            color: #ff0000;
+        }
+
+
+        h1:empty {
+            color: #ff0000;
+        }
+
+        .container-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    @if (context.HttpContext.Session.GetString("UserType") == "Property Owner" || context.HttpContext.Session.GetString("UserType") == "Property Manager")
+    {
+        <h1>List Of Buildings</h1>
+        <form id="searchForm" asp-controller="Buildings" asp-action="Index" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="display: flex; align-items: center;">
+                <select style="margin-right: 20px" name="searchType" onchange="selectSearch()" id="searchType">
+                    <option value="BuildingId">Building Number</option>
+                    <option value="BuildingName">Building Name</option>
+                    <option value="All">All Buildings</option>
+                </select>
+                <input type="text" id="searchString" name="searchString" class="form-control" />
+                <input style="width: 25px; height: 25px; margin-left: 20px" type="image" src="~/images/magnifying-glass.jfif" alt="Submit Form" form="searchForm">
+            </div>
+        </form>
+        @if (ViewData["ErrorMessage"] != null)
+        {
+            <h1>@ViewData["ErrorMessage"]</h1>
+        }
+        else
+        {
+            <div style="display: flex; align-items: center;">
+                <h1>Owned Buildings</h1>
+                <input style="width: 25px; height: 25px; margin-left: 20px" type="image" src="~/images/plus.png" alt="Create new building" onclick="navigateToCreateView()">
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Building Number
+                        </th>
+                        <th>
+                            Building Name
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BuildingId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BuildingName)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.BuildingId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.BuildingId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.BuildingId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+    else
+    {
+        <div class="container-center">
+            <h1>You Have No Authorization to Access</h1>
+            <a style="margin-left: 30px" class="btn btn-primary" asp-action="Index" asp-controller="Home">Back to Home Page</a>
+        </div>
+    }
+    <script>
+        function navigateToCreateView() {
+            // Redirect to another view or page
+            window.location.href = '/Buildings/Create';
+        }
+        function selectSearch() {
+            var searchType = document.getElementById("searchType");
+            var searchString = document.getElementById("searchString");
+            if (searchType["value"] == "All") {
+                searchString.style.display = 'none';
+            }
+            else {
+                searchString.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

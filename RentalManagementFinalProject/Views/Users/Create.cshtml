@@ -1,0 +1,183 @@
+﻿@model RentalManagementFinalProject.Models.User
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+
+        /* Header Styles */
+        h1 {
+            color: #3498db;
+            text-align: center;
+        }
+
+        /* Form Styles */
+        form {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #3498db;
+        }
+
+        input[type="text"],
+        select {
+            padding: 10px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #3498db;
+            border: 1px solid #3498db;
+            cursor: pointer;
+        }
+
+            .btn-primary:hover {
+                background-color: #2072b3;
+                border: 1px solid #2072b3;
+            }
+
+        /* Error Message Styles */
+        .text-danger {
+            color: #ff0000;
+        }
+
+        /* Authorization Message Styles */
+        h1:empty {
+            color: #ff0000;
+        }
+
+        .container-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    @if (context.HttpContext.Session.GetString("UserType") == "Property Owner")
+    {
+        <h1>Create Property Manager</h1>
+        <hr />
+        <div class="row">
+            @if (ViewData["ErrorMessage"] != null)
+            {
+                <h1>@ViewData["ErrorMessage"]</h1>
+            }
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="container-center">
+                    <table>
+                        <tr>
+                            <th><label asp-for="UserName" class="control-label">User Name</label></th>
+                            <td> <input type="text" asp-for="UserName" class="form-control" /></td>
+                            <td><span asp-validation-for="UserName" class="text-danger"></span></td>
+                        </tr>
+                        <tr>
+                            <th><label asp-for="FirstName" class="control-label">First Name</label></th>
+                            <td><input type="text" asp-for="FirstName" class="form-control" /></td>
+                            <td> <span asp-validation-for="FirstName" class="text-danger"></span></td>
+                        </tr>
+                        <tr>
+                            <th><label asp-for="LastName" class="control-label">Last Name</label></th>
+                            <td><input type="text" asp-for="LastName" class="form-control" /></td>
+                            <td><span asp-validation-for="LastName" class="text-danger"></span></td>
+                        </tr>
+                        <tr>
+                            <th><label asp-for="Password" class="control-label"></label></th>
+                            <td><input type="text" asp-for="Password" class="form-control" /></td>
+                            <td><span asp-validation-for="Password" class="text-danger"></span></td>
+                        </tr>
+                        <tr>
+
+
+                            <th><label asp-for="UserTypeId" class="control-label">User Type</label></th>
+                            <td>
+                                <select asp-for="UserTypeId" class="form-control" readonly>
+                                    <option value="2">Property Manager</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label asp-for="StatusId" class="control-label">Status</label></th>
+                            <td>
+                                <select asp-for="StatusId" class="form-control" readonly>
+                                    <option value="1">Active</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="container-center" style="margin-top: 50px;">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a style="margin-left: 30px" class="btn btn-primary" asp-action="Index">Back to List</a>
+                </div>
+
+            </form>
+        </div>
+        @section Scripts {
+        @{
+                await Html.RenderPartialAsync("_ValidationScriptsPartial");
+            }
+        }
+        
+    }
+    else
+    {
+        <div class="container-center">
+            <h1>You Have No Authorization to Access</h1>
+            <a style="margin-left: 30px" class="btn btn-primary" asp-action="Index" asp-controller="Home">Back to Home Page</a>
+        </div>
+    }
+</body>
+</html>
+
+

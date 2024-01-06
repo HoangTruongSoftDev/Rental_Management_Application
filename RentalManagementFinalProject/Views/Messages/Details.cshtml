@@ -1,0 +1,178 @@
+﻿@model RentalManagementFinalProject.Models.Message
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+
+        /* Header Styles */
+        h1 {
+            color: #3498db;
+            text-align: center;
+        }
+
+        /* Form Styles */
+        form {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #3498db;
+        }
+
+        input[type="text"],
+        select {
+            padding: 10px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #3498db;
+            border: 1px solid #3498db;
+            cursor: pointer;
+        }
+
+            .btn-primary:hover {
+                background-color: #2072b3;
+                border: 1px solid #2072b3;
+            }
+
+        /* Error Message Styles */
+        .text-danger {
+            color: #ff0000;
+        }
+
+        /* Authorization Message Styles */
+        h1:empty {
+            color: #ff0000;
+        }
+
+        .container-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    @if (context.HttpContext.Session.GetString("UserType") == "Property Owner" || context.HttpContext.Session.GetString("UserType") == "Property Manager" || context.HttpContext.Session.GetString("UserType") == "Tenant")
+    {
+
+        <h1>Message Information</h1>
+        <hr />
+        <div class="row">
+            @if (ViewData["ErrorMessage"] != null)
+            {
+                <h1>@ViewData["ErrorMessage"]</h1>
+            }
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="container-center">
+                <table>
+                    <tr>
+                        <th><label class="control-label">Sender</label></th>
+                        <td>
+                            <div class="col-sm-10">
+                                @{
+                                    ViewData["Fullname"] = Model.Sender.FirstName + " " + Model.Sender.LastName;
+                                }
+                                @ViewData["Fullname"]
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label class="control-label">Recipient</label></th>
+                        <td>
+                            <div class="col-sm-10">
+                                @{
+                                    ViewData["Fullname"] = Model.Recipient.FirstName + " " + Model.Recipient.LastName;
+                                }
+                                @ViewData["Fullname"]
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label asp-for="MessageContent" class="control-label">Content Of Message</label></th>
+                        <td>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(model => model.MessageContent)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label asp-for="TimeCreated" class="control-label">Message Created Time</label></th>
+                        <td>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(model => model.TimeCreated)
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="container-center" style="margin-top: 50px;">
+                <a class="btn btn-primary" asp-action="Create">Reply</a>
+                <a style="margin-left: 30px" class="btn btn-primary" asp-action="Index">Back to List</a>
+            </div>
+        </div>
+        @section Scripts {
+        @{
+                await Html.RenderPartialAsync("_ValidationScriptsPartial");
+            }
+        }
+    }
+    else
+    {
+        <div class="container-center">
+            <h1>You Have No Authorization to Access</h1>
+            <a style="margin-left: 30px" class="btn btn-primary" asp-action="Index" asp-controller="Home">Back to Home Page</a>
+        </div>
+    }
+</body>
+</html>

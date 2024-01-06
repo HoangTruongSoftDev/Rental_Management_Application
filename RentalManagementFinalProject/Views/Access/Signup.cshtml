@@ -1,0 +1,126 @@
+﻿@model RentalManagementFinalProject.Models.User
+@{
+    ViewData["Title"] = "Signup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Apply background color */
+        body {
+            background-color: #f0f8ff; /* Light Blue */
+            font-family: Arial, sans-serif; /* Use a suitable font-family */
+        }
+
+        /* Login container */
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: #ffffff; /* White */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Login form styles */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .control-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333; /* Dark Text Color */
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd; /* Light Gray Border */
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db; /* Light Blue Button Color */
+            color: #fff; /* White Text Color */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .btn-primary:hover {
+                background-color: #2980b9; /* Slightly Darker Blue on Hover */
+            }
+
+        .password-container {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-4">
+            <h1>Sign Up </h1>
+            <form asp-controller="Access" asp-action="Signup" method="post">
+                @Html.ValidationMessage("ErrorMessage")
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <div class="password-container">
+                    <input id="password" type="password" asp-for="Password" class="form-control" />
+                    <img id="togglePasswordButton" style="height: 25px; width: 25px" alt="Show-Hide Password" src="~/images/show-password.png" onclick="togglePassword()" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Sign Up" class="btn btn-primary" />
+                </div>
+                <div>
+                    @Html.ActionLink("Click here to Login", "Login")
+                </div>
+            </form>
+        </div>
+    </div>
+   
+    <script>
+        function togglePassword() {
+            var passwordInput = document.getElementById("password");
+            var imageButtonShowPassword = document.getElementById("togglePasswordButton");
+            // Toggle between password and text input types
+            passwordInput["type"] = passwordInput["type"] == "password" ? "text" : "password";
+            imageButtonShowPassword["src"] = passwordInput["type"] == "password" ? "/images/show-password.png" : "/images/hide-password.png";
+        }
+    </script>
+</body>
+</html>

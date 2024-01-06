@@ -1,0 +1,144 @@
+﻿@* @using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-center">
+    <h1 class="display-4">Welcome to Rental Property</h1>
+    @if (context.HttpContext.Session.GetString("UserType") != "Property Owner" && context.HttpContext.Session.GetString("UserType") != "Property Manager" && context.HttpContext.Session.GetString("UserType") != "Tenant")
+    {
+        @Html.ActionLink("Click here to Login", "Login", "Access")
+        @Html.ActionLink("Click here to Sign Up", "Signup", "Access")
+    }
+
+</div>
+ *@
+@model IEnumerable<RentalManagementFinalProject.Models.Apartment>
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
+@{
+    ViewData["Title"] = "Home Page";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent Apartments</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #3498db;
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        section {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 30px;
+        }
+
+        .apartment {
+            flex: 0 1 30%;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+            transition: transform 0.3s;
+        }
+
+            .apartment:hover {
+                transform: scale(1.05);
+            }
+
+            .apartment img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+                border-bottom: 1px solid #ddd;
+            }
+
+        .apartment-content {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .container-link {
+            margin: 40px;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Rental Apartments</h1>
+        <p>Your Dream Home Awaits You</p>
+        @if (context.HttpContext.Session.GetString("UserType") != "Property Owner" && context.HttpContext.Session.GetString("UserType") != "Property Manager" && context.HttpContext.Session.GetString("UserType") != "Tenant")
+        {
+            <div style="display: flex;justify-content:center">
+                <div class="container-link">
+                    <p>@Html.ActionLink("Click here to Login", "Login", "Access")</p>
+                </div>
+                <div class="container-link">
+                    <p>@Html.ActionLink("Click here to Sign Up", "Signup", "Access")</p>                   
+                </div>
+            </div>
+            
+            
+        }
+    </header>
+    
+    <section>
+        @{
+            int counter = 1;
+            foreach (var item in Model)
+            {
+                string imageSource = "/images/apartment" + counter + ".jfif";
+                <div class="apartment">
+                    <img src="@imageSource" alt="Apartment">
+                    <div class="apartment-content">
+                        <h2>Apartment Number: @Html.DisplayFor(modelItem => item.ApartmentNumber)</h2>
+                        <p>Building: @Html.DisplayFor(modelItem => item.Building.BuildingName)</p>
+                        <p>Price: $@Html.DisplayFor(modelItem => item.Price)/month</p>
+                        <p>Type: @Html.DisplayFor(modelItem => item.Type)</p>
+                        <p> @Html.DisplayFor(modelItem => item.NumberOfRoom) rooms | @Html.DisplayFor(modelItem => item.NumberOfBathroom) Bathrooms</p>
+                        <p>Status: @Html.DisplayFor(modelItem => item.Status.Description)</p>
+                        <a asp-action="Details" asp-controller="Apartments" asp-route-id="@item.ApartmentNumber">Details</a>
+                    </div>
+                </div>
+                counter += 1;
+            }
+        }
+        
+
+
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Rent Apartments. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

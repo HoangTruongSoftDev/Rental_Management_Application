@@ -1,0 +1,164 @@
+﻿@model RentalManagementFinalProject.Models.Building
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+
+        /* Header Styles */
+        h1 {
+            color: #3498db;
+            text-align: center;
+        }
+
+        /* Form Styles */
+        form {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #3498db;
+        }
+
+        input[type="text"],
+        select {
+            padding: 10px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #3498db;
+            border: 1px solid #3498db;
+            cursor: pointer;
+        }
+
+            .btn-primary:hover {
+                background-color: #2072b3;
+                border: 1px solid #2072b3;
+            }
+
+        /* Error Message Styles */
+        .text-danger {
+            color: #ff0000;
+        }
+
+        /* Authorization Message Styles */
+        h1:empty {
+            color: #ff0000;
+        }
+
+        .container-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    @if (context.HttpContext.Session.GetString("UserType") == "Property Owner" || context.HttpContext.Session.GetString("UserType") == "Property Manager")
+    {
+
+        <h1>Delete Building</h1>
+
+        <h3 style="text-align: center">Are you sure you want to delete this Building?</h3>
+        <h5 style="text-align: center">(This will affect to related apartments)</h5>
+        <hr />
+        <div class="row">
+            @if (ViewData["ErrorMessage"] != null)
+            {
+                <h1>@ViewData["ErrorMessage"]</h1>
+            }
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="container-center">
+                <table>
+                    <tr>
+                        <th><label asp-for="BuildingId" class="control-label">Building Number</label></th>
+                        <th>
+                            <div class="col-sm-10">
+                                @Html.DisplayNameFor(model => model.BuildingId)
+                            </div>
+                        </th>
+
+                    </tr>
+                    <tr>
+                        <th><label asp-for="BuildingName" class="control-label">Building Name</label></th>
+                        <td>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(model => model.BuildingName)
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <form asp-action="Delete">
+                <div class="container-center" style="margin-top: 50px;">
+                    <input type="hidden" asp-for="BuildingId" />
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                    <a style="margin-left: 30px" class="btn btn-primary" asp-action="Index">Back to List</a>
+                </div>
+            </form>
+
+        </div>
+        @section Scripts {
+        @{
+                await Html.RenderPartialAsync("_ValidationScriptsPartial");
+            }
+        }
+    }
+    else
+    {
+        <div class="container-center">
+            <h1>You Have No Authorization to Access</h1>
+            <a style="margin-left: 30px" class="btn btn-primary" asp-action="Index" asp-controller="Home">Back to Home Page</a>
+        </div>
+    }
+</body>
+</html>

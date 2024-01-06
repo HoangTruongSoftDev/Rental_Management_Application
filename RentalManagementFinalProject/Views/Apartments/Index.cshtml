@@ -1,0 +1,410 @@
+﻿@model IEnumerable<RentalManagementFinalProject.Models.Apartment>
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <style>
+
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        h1 {
+            color: #3498db;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+            a:hover {
+                color: #2072b3;
+            }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        select, input[type="text"] {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+        }
+
+        /* Table Styles */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            .table th, .table td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #3498db;
+            }
+
+            .table th {
+                background-color: #3498db;
+                color: #fff;
+            }
+
+
+        .text-danger {
+            color: #ff0000;
+        }
+
+
+        h1:empty {
+            color: #ff0000;
+        }
+
+        .container-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>List Of Available Apartments</h1>
+    <form id="searchForm" asp-controller="Apartments" asp-action="Index" method="post" onsubmit="prepareSearchString()">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group" style="display: flex; align-items: center;">
+            <select style="margin-right: 20px" name="searchType" onchange="selectSearch()" id="searchType">
+                <option value="Description">Description</option>
+                <option value="BuildingName">Building Name</option>
+                <option value="Status">Status</option>
+                <option value="Type">Type</option>
+                <option value="Price">Price</option>
+                <option value="NumberOfRoom">Number Of Room</option>
+                <option value="NumberOfBathroom">Number Of Bathroom</option>
+                <option value="All">All Apartments</option>
+            </select>
+            <input type="text" id="searchString" name="searchString" class="form-control" /> <!---->
+            <select style="display: none" id="dropDownListStatus" name="searchString" class="form-control"> <!---->
+                <option value="Available">Available</option>
+                <option value="Pending">Pending</option>
+                <option value="Rented">Rented</option>
+                <option value="Unavailable">Unavailable</option>
+            </select>
+            <select style="display: none" id="dropDownListType" name="searchString" class="form-control"> <!---->
+                <option value="Studio">Studio</option>
+                <option value="2 1/2">2 1/2</option>
+                <option value="3 1/2">3 1/2</option>
+                <option value="4 1/2">4 1/2</option>
+                <option value="4 2 1/2">4 2 1/2</option>
+                <option value="5 1/2">5 1/2</option>
+                <option value="5 2 1/2">5 2 1/2</option>
+            </select>
+            <div id="searchRangePrice" style="display: none; align-items: center">
+                <input type="number" placeholder="min" id="searchMinPrice" name="searchMinPrice" class="form-control" /> &nbsp; - &nbsp;
+                <input type="number" placeholder="max" id="searchMaxPrice" name="searchMaxPrice" class="form-control" />
+            </div>
+            <input style="display: none" type="number" id="searchNumberOfRoom" name="searchNumberOfRoom" class="form-control" /> <!---->
+            <input style="width: 25px; height: 25px; margin-left: 20px" type="image" src="~/images/magnifying-glass.jfif" alt="Submit Form" form="searchForm">
+            
+            
+        </div>
+    </form>
+    @if (ViewData["ErrorMessage"] != null)
+    {
+        <h1>@ViewData["ErrorMessage"]</h1>
+    }
+    else
+    {
+        <div style="display: flex; align-items: center;">
+            <h1>Available Apartment</h1>
+            @if (context.HttpContext.Session.GetString("UserType") == "Property Owner" || context.HttpContext.Session.GetString("UserType") == "Property Manager")
+            {
+                <input style="width: 25px; height: 25px; margin-left: 20px" type="image" src="~/images/plus.png" alt="Create new apartment" onclick="navigateToCreateView()">
+            }
+            
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Apartment Number
+                    </th>
+                    <th>
+                        Building Name
+                    </th>
+                    <th>
+                        Apartment Description
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Apartment Type
+                    </th>                           
+                    <th>
+                        Number Of Room                       
+                    </th>
+                    <th>
+                        Number Of Bathroom
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Where(a => a.Status.Description == "Available"))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ApartmentNumber)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Building.BuildingName)
+                            
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                            
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                            
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumberOfRoom)
+                            
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumberOfBathroom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        @if (context.HttpContext.Session.GetString("UserType") == "Property Owner" || context.HttpContext.Session.GetString("UserType") == "Property Manager")
+                        {
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ApartmentNumber">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.ApartmentNumber">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.ApartmentNumber">Delete</a>
+                            </td>
+                        }
+                        else if (context.HttpContext.Session.GetString("UserType") == "Tenant")
+                        {
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.ApartmentNumber">Details</a> |
+                                <a asp-action="Create" asp-controller="Appointments">Book</a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.ApartmentNumber">Details</a> |
+                                <a asp-controller="Access" asp-action="Login">Book</a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="display: flex; align-items: center;">
+            <h1>Unavailable Apartment</h1>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Apartment Number
+                    </th>
+                    <th>
+                        Building Name
+                    </th>
+                    <th>
+                        Apartment Description
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Apartment Type
+                    </th>
+                    <th>
+                        Number Of Room
+                    </th>
+                    <th>
+                        Number Of Bathroom
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Where(a => a.Status.Description != "Available"))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ApartmentNumber)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Building.BuildingName)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumberOfRoom)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumberOfBathroom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        @if (context.HttpContext.Session.GetString("UserType") == "Property Owner" || context.HttpContext.Session.GetString("UserType") == "Property Manager")
+                        {
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ApartmentNumber">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.ApartmentNumber">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.ApartmentNumber">Delete</a> |
+                            </td>
+                        }
+                        else if (context.HttpContext.Session.GetString("UserType") == "Tenant")
+                        {
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.ApartmentNumber">Details</a> |
+                                <a asp-action="Create" asp-controller="Messages">Reserve</a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.ApartmentNumber">Details</a> |
+                                <a asp-controller="Access" asp-action="Login">Reserve</a>
+                            </td>
+                        }
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+ 
+    <script>
+        function navigateToCreateView() {
+            // Redirect to another view or page
+            window.location.href = '/Apartments/Create';
+        }
+        function selectSearch() {
+            var searchType = document.getElementById("searchType");
+            var searchString = document.getElementById("searchString");
+            var dropDownListType = document.getElementById("dropDownListType");
+            var dropDownListStatus = document.getElementById("dropDownListStatus");
+            var searchRangePrice = document.getElementById("searchRangePrice");
+            var searchNumberOfRoom = document.getElementById("searchNumberOfRoom");
+            if (searchType["value"] == "All") {
+                searchString.style.display = 'none';
+                dropDownListType.style.display = 'none';
+                dropDownListStatus.style.display = 'none';
+                searchRangePrice.style.display = 'none';
+                searchNumberOfRoom.style.display = 'none';
+            }
+            else if (searchType["value"] == "Type") {
+                searchString.style.display = 'none';
+                dropDownListType.style.display = 'block';
+                dropDownListStatus.style.display = 'none';
+                searchRangePrice.style.display = 'none';
+                searchNumberOfRoom.style.display = 'none';
+            }
+            else if (searchType["value"] == "Status") {
+                searchString.style.display = 'none';
+                dropDownListType.style.display = 'none';
+                dropDownListStatus.style.display = 'block';
+                searchRangePrice.style.display = 'none';
+                searchNumberOfRoom.style.display = 'none';
+            }
+            else if (searchType["value"] == "BuildingName" || searchType["value"] == "Description") {
+                searchString.style.display = 'block';
+                dropDownListType.style.display = 'none';
+                dropDownListStatus.style.display = 'none';
+                searchRangePrice.style.display = 'none';
+                searchNumberOfRoom.style.display = 'none';
+            }
+            else if (searchType["value"] == "Price") {
+                searchString.style.display = 'none';
+                dropDownListType.style.display = 'none';
+                dropDownListStatus.style.display = 'none';
+                searchRangePrice.style.display = 'flex';
+                searchNumberOfRoom.style.display = 'none';
+            }
+            else if (searchType["value"] == "NumberOfRoom" || searchType["value"] == "NumberOfBathroom") {
+                searchString.style.display = 'none';
+                dropDownListType.style.display = 'none';
+                dropDownListStatus.style.display = 'none';
+                searchRangePrice.style.display = 'none';
+                searchNumberOfRoom.style.display = 'block';
+            }
+        }
+        function prepareSearchString() {
+
+            var searchType = document.getElementById("searchType").value;
+            var searchStringInput = document.getElementById("searchString");
+            var dropDownListType = document.getElementById("dropDownListType");
+            var statusDropdown = document.getElementById("dropDownListStatus");
+
+            // Set the name attribute of the currently visible element to "searchString"
+            if (searchType == "Type") {
+                searchStringInput.name = ""; // Remove the name attribute from the input
+                dropDownListType.name = "searchString";
+                statusDropdown.name = "";
+            } else if (searchType == "Status") {
+                searchStringInput.name = ""; // Remove the name attribute from the input
+                statusDropdown.name = "searchString";
+                dropDownListType.name = "";
+            }
+            else if (searchType == "Description" || searchType == "BuildingName") {
+                // Reset the name attributes to the default
+                searchStringInput.name = "searchString";
+                dropDownListType.name = "";
+                statusDropdown.name = "";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+﻿@model RentalManagementFinalProject.Models.Apartment
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor context
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+
+        /* Header Styles */
+        h1 {
+            color: #3498db;
+            text-align: center;
+        }
+
+        /* Form Styles */
+        form {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #3498db;
+        }
+
+        input[type="text"],
+        select {
+            padding: 10px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #3498db;
+            border: 1px solid #3498db;
+            cursor: pointer;
+        }
+
+            .btn-primary:hover {
+                background-color: #2072b3;
+                border: 1px solid #2072b3;
+            }
+
+        /* Error Message Styles */
+        .text-danger {
+            color: #ff0000;
+        }
+
+        /* Authorization Message Styles */
+        h1:empty {
+            color: #ff0000;
+        }
+
+        .container-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    @if (context.HttpContext.Session.GetString("UserType") == "Property Owner" || context.HttpContext.Session.GetString("UserType") == "Property Manager")
+    {
+        <h1>Create New Apartment</h1>
+        <hr />
+        <div class="row">
+            @if (ViewData["ErrorMessage"] != null)
+            {
+                <h1>@ViewData["ErrorMessage"]</h1>
+            }
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="container-center">
+                    <table>
+                        <tr>
+                            <th><label asp-for="ApartmentNumber" class="control-label">Apartment Number</label></th>
+                            <td> <input type="number" asp-for="ApartmentNumber" class="form-control" /></td>
+                            <td><span asp-validation-for="ApartmentNumber" class="text-danger"></span></td>
+                        </tr>
+                        <tr>
+                            <th><label asp-for="BuildingId" class="control-label">Building Name</label></th>
+                            <td>
+                                <select asp-for="BuildingId" class="form-control" asp-items="ViewBag.listOfBuildingName"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label asp-for="StatusId" class="control-label">Status</label></th>
+                            <td>
+                                <select asp-for="StatusId" class="form-control" readonly>
+                                    <option value="3">Available</option>
+                                </select>
+                            </td>
+                            <th style="text-align:center"><label asp-for="NumberOfRoom" class="control-label">Nb. Room</label></th>
+                            <th style="text-align:center"><label asp-for="NumberOfBathroom" class="control-label">Nb. Bathroom</label></th>
+                        </tr>
+                        <tr>
+                            <th><label asp-for="Type" class="control-label">Apartment Type</label></th>
+                            <td>
+                                <select id="type" asp-for="Type" class="form-control" onchange="selectType()">
+                                    <option value="Studio">Studio</option>
+                                    <option value="2 1/2">2 1/2</option>
+                                    <option value="3 1/2">3 1/2</option>
+                                    <option value="4 1/2">4 1/2</option>
+                                    <option value="4 2 1/2">4 2 1/2</option>
+                                    <option value="5 1/2">5 1/2</option>
+                                    <option value="5 2 1/2">5 2 1/2</option>
+                                </select>
+                            </td>
+                            <td> <input type="number" id="numberOfRoom" asp-for="NumberOfRoom" class="form-control" readonly value="1" /></td>
+
+                            <td> <input type="number" id="numberOfBathroom" asp-for="NumberOfBathroom" class="form-control" readonly value="1" /></td>
+                        </tr>
+                        <tr>
+                            <th><label asp-for="Price" class="control-label">Price</label></th>
+                            <td> <input type="number" asp-for="Price" class="form-control" /></td>
+                            <td><span asp-validation-for="BuildingId" class="text-danger"></span></td>
+                        </tr>
+
+                        <tr>
+                            <th style="vertical-align: top"><label asp-for="Description" class="control-label">Description</label></th>
+                            <td colspan="3"><textarea asp-for="Description" class="form-control" style="height: 300px; resize: none"></textarea></td>
+                            <td> <span asp-validation-for="Description" class="text-danger"></span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="container-center" style="margin-top: 50px;">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a style="margin-left: 30px" class="btn btn-primary" asp-action="Index">Back to List</a>
+                </div>
+
+            </form>
+        </div>
+        @section Scripts {
+        @{
+                await Html.RenderPartialAsync("_ValidationScriptsPartial");
+            }
+        }
+    }
+    else
+    {
+        <div class="container-center">
+            <h1>You Have No Authorization to Access</h1>
+            <a style="margin-left: 30px" class="btn btn-primary" asp-action="Index" asp-controller="Home">Back to Home Page</a>
+        </div>
+    }
+    <script>
+        function selectType() {
+
+            let type = document.getElementById("type");
+            var numberOfRoom = document.getElementById("numberOfRoom");
+            var numberOfBathroom = document.getElementById("numberOfBathroom");
+            if (type.value == "Studio") {
+                numberOfRoom.value = 1;
+                numberOfBathroom.value = 1;
+            }
+            else {
+                var componentOfType = type.value.split(" ");
+                numberOfRoom.value = componentOfType[0];
+                numberOfBathroom.value = componentOfType[1] == "1/2" ? 1 : componentOfType[1]
+            }
+        }
+    </script>
+</body>
+
+</html>
+
+
