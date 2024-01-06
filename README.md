@@ -1,2 +1,3 @@
 # Rental_Management_Application
-This ASP.Net Core MVC Web allows managers to manage their properties or clients to rent apartments
+
+Property Rental Management Web Site allows any potential tenant to search an apartment that is suitable for his/her needs. The Web site also helps the property owner and the property manager to facilitate the management tasks of property rental
